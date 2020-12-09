@@ -3,7 +3,8 @@ POST http://localhost:3000/api/setuserdata
 Content-Type: application/json
 
 {
-    "name" : "apakah akuada",
-    "email" : "apakah_aku_ada@gmail.com",
+    "token" : "jvalle2020",
+    "name" : "sepriyanah",
+    "email" : "sepri@gmail.com",
     "password" : "1qazxsw2"
 }
