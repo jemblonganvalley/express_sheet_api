@@ -6,6 +6,7 @@ const {
   editData,
   setComment,
   getComment,
+  login,
 } = require("../modal/ss");
 
 //READ USER DATA
@@ -16,15 +17,25 @@ router.get("/api/userdata", (req, res) => {
 });
 
 //ADD DATA
-router.post("/api/setuserdata", (req, res) => {
+router.post("/api/register", (req, res) => {
   const { name, email, password } = req.body;
-  setData(name, email, password);
-  res.json({
-    message: "success",
-    data: {
-      name: name,
-      email: email,
-    },
+  setData(name, email, password).then((data) => {
+    if (data) {
+      res.json({
+        message: "success",
+        data: {
+          name: name,
+          email: email,
+        },
+        next: true,
+      });
+      res.end();
+    } else {
+      res.status(404).json({
+        message: "allready register.!",
+        next: false,
+      });
+    }
   });
 });
 
@@ -66,6 +77,22 @@ router.post("/api/setcomment", async (req, res) => {
 router.post("/api/comment", (req, res) => {
   getComment().then((data) => {
     res.json(data);
+  });
+});
+
+//L O G I N
+router.post("/api/login", async (req, res) => {
+  const { email, password } = await req.body;
+  login(email, password).then((data) => {
+    if (data) {
+      res.status(200).json({
+        message: "success",
+      });
+    } else {
+      res.status(404).json({
+        message: "failed",
+      });
+    }
   });
 });
 

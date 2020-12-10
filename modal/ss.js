@@ -14,24 +14,38 @@ exports.getData = async () => {
   const sheet_data = await doc.sheetsByTitle["userdata"];
   const rows = await sheet_data.getRows();
   const compile = await rows.map((e) => {
-    result.push(e._rawData);
+    const rd = {
+      id: e._rawData[0],
+      name: e._rawData[1],
+      email: e._rawData[2],
+      password: e._rawData[3],
+    };
+    result.push(rd);
   });
   return result;
 };
 
-//ADD USER
+//ADD USER / R E G I S T E R
 exports.setData = async (name, email, password) => {
+  const em = [];
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
   const sheet_data = await doc.sheetsByTitle["userdata"];
   const rows = await sheet_data.getRows();
-  const add = await sheet_data.addRow({
-    id: rows.length + 1,
-    name: name,
-    email: email,
-    password: password,
+  const checkEmail = rows.map((e) => {
+    em.push(e._rawData[2]);
   });
-  return rows;
+  if (em.includes(email)) {
+    return false;
+  } else {
+    const add = await sheet_data.addRow({
+      id: rows.length + 1,
+      name: name,
+      email: email,
+      password: password,
+    });
+    return rows;
+  }
 };
 
 //EDIT DATA USER
@@ -53,7 +67,7 @@ exports.editData = async (id, name, email, password) => {
   console.log(rows[e].name + " " + rows[e].email);
 };
 
-//READ USER
+//READ COMMENT
 exports.getComment = async () => {
   const result = [];
   await doc.useServiceAccountAuth(key);
@@ -61,7 +75,14 @@ exports.getComment = async () => {
   const sheet_data = await doc.sheetsByTitle["comment"];
   const rows = await sheet_data.getRows();
   const compile = await rows.map((e) => {
-    result.push(e._rawData);
+    const cm = {
+      id: e._rawData[0],
+      comment_id: e._rawData[1],
+      comment_username: e._rawData[2],
+      comment_body: e._rawData[3],
+      comment_like: e._rawData[4],
+    };
+    result.push(cm);
   });
   return result;
 };
@@ -79,4 +100,24 @@ exports.setComment = async (comment_username, comment_body) => {
     comment_body: comment_body,
     comment_username: comment_username,
   });
+};
+
+//LOGIN
+exports.login = async (email, password) => {
+  const em = [];
+  const pass = [];
+  await doc.useServiceAccountAuth(key);
+  await doc.loadInfo();
+  const sheet_data = await doc.sheetsByTitle["userdata"];
+  const cell = await sheet_data.getRows();
+  // store username
+  await cell.map((e, i) => {
+    em.push(e._rawData[2]);
+    pass.push(e._rawData[3]);
+  });
+  if (em.includes(email) && pass.includes(password)) {
+    return true;
+  } else {
+    return false;
+  }
 };
