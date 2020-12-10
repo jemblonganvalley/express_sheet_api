@@ -1,10 +1,63 @@
 ###
+GET http://localhost:3000/api/userdata
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020"
+}
+
+###
 POST http://localhost:3000/api/setuserdata
 Content-Type: application/json
 
 {
-    "token" : "jvalle2020",
-    "name" : "sepriyanah",
-    "email" : "sepri@gmail.com",
+    "token" : "jvalley2020",
+    "name" : "adit",
+    "email" : "adit@gmail.com",
     "password" : "1qazxsw2"
 }
+
+###
+POST http://localhost:3000/api/editdata
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020",
+    "id" : 7,
+    "name" : "jonathan petrus",
+    "email" : "jonathan@gmail.com",
+    "password" : "1qazxsw2"
+}
+
+###
+POST http://localhost:3000/api/comment
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020",
+    "comment_username" : "andi",
+    "comment_body" : "hallo saya ini adni gagap"
+ 
+}
+
+###
+GET http://localhost:3000/api/comment
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020"
+ 
+}
+
+###
+POST https://30733f5e4d53.ngrok.io/api/setcomment
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020",
+    "comment_username" : "ajang",
+    "comment_body" : "hallo saya andi ajang"
+ 
+}
+
+
