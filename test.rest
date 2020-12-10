@@ -11,9 +11,8 @@ POST http://localhost:3000/api/setuserdata
 Content-Type: application/json
 
 {
-    "token" : "jvalley2020",
-    "name" : "adit",
-    "email" : "adit@gmail.com",
+    "name" : "dan",
+    "email" : "dan@gmail.com",
     "password" : "1qazxsw2"
 }
 
