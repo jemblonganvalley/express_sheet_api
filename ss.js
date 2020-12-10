@@ -20,7 +20,7 @@ exports.getData = async () => {
 exports.setData = async (name, email, password) => {
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
-  const sheet_data = await doc.sheetsByTitle["data"];
+  const sheet_data = await doc.sheetsByTitle["userdata"];
   const rows = await sheet_data.getRows();
   const add = await sheet_data.addRow({
     id: rows.length + 1,
