@@ -73,8 +73,8 @@ router.post("/api/setcomment", async (req, res) => {
   }
 });
 
-//READ USER DATA
-router.post("/api/comment", (req, res) => {
+//READ ALL COMMeNT
+router.get("/api/comment", (req, res) => {
   getComment().then((data) => {
     res.json(data);
   });

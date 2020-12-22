@@ -35,28 +35,24 @@ Content-Type: application/json
 
 {
     "token" : "jvalley2020",
-    "comment_username" : "andi",
-    "comment_body" : "hallo saya ini adni gagap"
+    "comment_username" : "rahmat",
+    "comment_body" : "hallo saya ini rahmat"
  
 }
 
 ###
-POST http://localhost:5000/api/comment
+GET http://localhost:5000/api/comment
 Content-Type: application/json
 
-{
-    "token" : "jvalley2020"
- 
-}
 
 ###
-POST https://30733f5e4d53.ngrok.io/api/setcomment
+POST http://localhost:5000/api/setcomment
 Content-Type: application/json
 
 {
     "token" : "jvalley2020",
-    "comment_username" : "ajang",
-    "comment_body" : "hallo saya andi ajang"
+    "comment_username" : "rahmat",
+    "comment_body" : "hallo saya rahmat"
  
 }
 
@@ -67,7 +63,7 @@ Content-Type: application/json
 {
     "token" : "jvalley2020",
     "email" : "fadliselaz@gmail.com",
-    "password" : "1qazxsw2"
+    "password" : "fadliselaz13"
  
 }
 
