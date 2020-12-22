@@ -20,6 +20,21 @@ router.get("/", (req, res) => {
       align-items : center;
     ">
     <h3>selamat datang..</h3>
+    <h4>Silakan gunakan endpoint berikut</h4>
+    <ul>
+      <li>GET https://fadlisheet.herokuapp.com/api/userdata</li>
+      <li>POST https://fadlisheet.herokuapp.com/api/register</li>
+      <li>POST https://fadlisheet.herokuapp.com/api/login</li>
+      <li>POST https://fadlisheet.herokuapp.com/api/comment</li>
+      <li>POST https://fadlisheet.herokuapp.com/api/setcomment</li>
+    </ul>
+    <p>
+      Silakan gunakan body : name , email dan password <br>
+      dan masukan body tokennya <br>
+      token silakan minta ke mas Fadli. <br><br>
+
+      thank you..
+    </p>
     </div>
   `);
 });
