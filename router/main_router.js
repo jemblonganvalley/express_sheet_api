@@ -9,6 +9,21 @@ const {
   login,
 } = require("../modal/ss");
 
+//Wellcome page
+router.get("/", (req, res) => {
+  res.send(`
+    <div class='container' style="
+      width : 100vw;
+      height : 100vh;
+      display : flex;
+      justify-content : center;
+      align-items : center;
+    ">
+    <h3>selamat datang..</h3>
+    </div>
+  `);
+});
+
 //READ USER DATA
 router.get("/api/userdata", (req, res) => {
   getData().then((data) => {
