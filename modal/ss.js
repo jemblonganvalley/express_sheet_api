@@ -1,6 +1,7 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const key = require("./key.json");
 const { v4: uuidv4 } = require("uuid");
+const e = require("express");
 
 const doc = new GoogleSpreadsheet(
   "1BRuQylaePuMb65Q2q8kLZsuT5LK4hClN-cI3AGyylUo"
@@ -118,8 +119,20 @@ exports.login = async (email, password) => {
     em.push(e._rawData[2]);
     pass.push(e._rawData[3]);
   });
-  if (em.includes(email) && pass.includes(password)) {
-    return true;
+  // if (em.includes(email) && pass.includes(password)) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+
+  //check apakah email ada
+  if (em.indexOf(email) >= 0) {
+    const emailIndex = em.indexOf(email);
+    if (pass[emailIndex] === password) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
