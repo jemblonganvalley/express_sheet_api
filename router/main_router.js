@@ -49,14 +49,15 @@ router.get("/api/userdata", (req, res) => {
 
 //ADD DATA
 router.post("/api/register", (req, res) => {
-  const { name, email, password } = req.body;
-  setData(name, email, password).then((data) => {
+  const { name, email, password, phone } = req.body;
+  setData(name, email, password, phone).then((data) => {
     if (data) {
       res.json({
         message: "success",
         data: {
           name: name,
           email: email,
+          phone: phone,
         },
         next: true,
       });
@@ -72,9 +73,9 @@ router.post("/api/register", (req, res) => {
 
 //EDIT DATA
 router.post("/api/editdata", async (req, res) => {
-  const { id, name, email, password } = await req.body;
+  const { id, name, email, password, phone } = await req.body;
   if (id) {
-    editData(id, name, email, password);
+    editData(id, name, email, password, phone);
     res.json({
       message: "success",
     });

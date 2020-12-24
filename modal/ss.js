@@ -19,6 +19,7 @@ exports.getData = async () => {
       name: e._rawData[1],
       email: e._rawData[2],
       password: e._rawData[3],
+      phone: e._rawData[4],
     };
     result.push(rd);
   });
@@ -26,7 +27,7 @@ exports.getData = async () => {
 };
 
 //ADD USER / R E G I S T E R
-exports.setData = async (name, email, password) => {
+exports.setData = async (name, email, password, phone) => {
   const em = [];
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
@@ -43,13 +44,14 @@ exports.setData = async (name, email, password) => {
       name: name,
       email: email,
       password: password,
+      phone: phone,
     });
     return rows;
   }
 };
 
 //EDIT DATA USER
-exports.editData = async (id, name, email, password) => {
+exports.editData = async (id, name, email, password, phone) => {
   const e = (await id) - 1;
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
@@ -62,6 +64,7 @@ exports.editData = async (id, name, email, password) => {
   rows[e].email = email; // update a value
   rows[e].name = name; // update a value
   rows[e].password = password; // update a value
+  rows[e].phone = phone; // update a value
   await rows[e].save(); // save updates
   // await rows[1].delete(); // delete a row
   console.log(rows[e].name + " " + rows[e].email);
