@@ -12,8 +12,8 @@ Content-Type: application/json
 
 {
     "token" : "jvalley2020",
-    "name" : "nonebelande",
-    "email" : "nonebelande@gmail.com",
+    "name" : "bryan",
+    "email" : "bryan@gmail.com",
     "password" : "1qazxsw2",
     "phone" : "081213655573"
 }
@@ -54,7 +54,7 @@ Content-Type: application/json
 {
     "token" : "jvalley2020",
     "email" : "fadliselaz@gmail.com",
-    "password" : "1qazxsw2"
+    "password" : "fadliselaz13"
  
 }
 

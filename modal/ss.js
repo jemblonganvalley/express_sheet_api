@@ -2,7 +2,7 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const key = require("./key.json");
 const { v4: uuidv4 } = require("uuid");
 const e = require("express");
-
+const {unHashing} = require("../middleware/hashing")
 const doc = new GoogleSpreadsheet(
   "1BRuQylaePuMb65Q2q8kLZsuT5LK4hClN-cI3AGyylUo"
 );
@@ -108,6 +108,7 @@ exports.setComment = async (comment_username, comment_body) => {
 
 //LOGIN
 exports.login = async (email, password) => {
+
   const em = [];
   const pass = [];
   await doc.useServiceAccountAuth(key);
@@ -128,7 +129,7 @@ exports.login = async (email, password) => {
   //check apakah email ada
   if (em.indexOf(email) >= 0) {
     const emailIndex = em.indexOf(email);
-    if (pass[emailIndex] === password) {
+    if (unHashing(password, pass[emailIndex])) {
       return true;
     } else {
       return false;

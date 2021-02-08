@@ -1,0 +1,65 @@
+###
+GET http://localhost:5000/api/userdata
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.ZmFkbGlzZWxhekBnbWFpbC5jb20.Clyp0kwDdQcKc5F5Bix-u4MJMKvL4gCf9IqyE9aQEG8
+
+###
+POST http://localhost:5000/api/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.ZmFkbGlzZWxhekBnbWFpbC5jb20.Clyp0kwDdQcKc5F5Bix-u4MJMKvL4gCf9IqyE9aQEG8
+
+{
+    "name" : "fadliselaz",
+    "email" : "fadliselaz@gmail.com",
+    "password" : "fadliselaz13",
+    "phone" : "081213655573"
+}
+
+###
+POST http://localhost:5000/api/editdata
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020",
+    "id" : 7,
+    "name" : "jonathan petrus",
+    "email" : "jonathan@gmail.com",
+    "password" : "1qazxsw2"
+}
+
+
+###
+GET http://localhost:5000/api/comment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.ZmFkbGlzZWxhekBnbWFpbC5jb20.Clyp0kwDdQcKc5F5Bix-u4MJMKvL4gCf9IqyE9aQEG8
+
+###
+POST http://localhost:5000/api/setcomment
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020",
+    "comment_username" : "fadliselaz",
+    "comment_body" : "hallo saya test saja"
+ 
+}
+
+###
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email" : "fadliselaz@gmail.com",
+    "password" : "fadliselaz13"
+ 
+}
+
+###
+GET http://localhost:5000/api/userdata
+Content-Type: application/json
+
+{
+    "token" : "jvalley2020"
+}
+
+

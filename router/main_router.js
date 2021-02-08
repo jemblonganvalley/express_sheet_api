@@ -8,9 +8,12 @@ const {
   getComment,
   login,
 } = require("../modal/ss");
+const jwt = require('jsonwebtoken')
+const auth_middleware = require("../middleware/auth");
+const {hashing} = require("../middleware/hashing");
 
 //Wellcome page
-router.get("/", (req, res) => {
+router.get("/", auth_middleware, (req, res) => {
   res.send(`
     <div class='container' style="
       width : 100vw;
@@ -41,15 +44,18 @@ router.get("/", (req, res) => {
 });
 
 //READ USER DATA
-router.get("/api/userdata", (req, res) => {
+router.get("/api/userdata", auth_middleware, (req, res) => {
   getData().then((data) => {
     res.json(data);
   });
 });
 
 //ADD DATA
-router.post("/api/register", (req, res) => {
-  const { name, email, password, phone } = req.body;
+router.post("/api/register", auth_middleware, (req, res) => {
+  let password = hashing(req.body.password)
+  
+  const { name, email, phone } = req.body;
+
   setData(name, email, password, phone).then((data) => {
     if (data) {
       res.json({
@@ -72,7 +78,7 @@ router.post("/api/register", (req, res) => {
 });
 
 //EDIT DATA
-router.post("/api/editdata", async (req, res) => {
+router.post("/api/editdata", auth_middleware, async (req, res) => {
   const { id, name, email, password, phone } = await req.body;
   if (id) {
     editData(id, name, email, password, phone);
@@ -87,7 +93,7 @@ router.post("/api/editdata", async (req, res) => {
 });
 
 //API SET COMMENT
-router.post("/api/setcomment", async (req, res) => {
+router.post("/api/setcomment", auth_middleware, async (req, res) => {
   const { comment_username, comment_body } = await req.body;
   if (comment_username) {
     setComment(comment_username, comment_body);
@@ -106,7 +112,7 @@ router.post("/api/setcomment", async (req, res) => {
 });
 
 //READ ALL COMMeNT
-router.get("/api/comment", (req, res) => {
+router.get("/api/comment", auth_middleware, (req, res) => {
   getComment().then((data) => {
     res.json(data);
   });
@@ -117,9 +123,16 @@ router.post("/api/login", async (req, res) => {
   const { email, password } = await req.body;
   login(email, password).then((data) => {
     if (data) {
-      res.status(200).json({
-        message: "success",
-      });
+      jwt.sign(email, process.env.TOKEN, (err, token)=>{
+        if(err){
+          res.status(404)
+        }
+        res.status(200).json({
+          message: "success",
+          token : token
+        });
+      })
+     
     } else {
       res.status(404).json({
         message: "failed",
