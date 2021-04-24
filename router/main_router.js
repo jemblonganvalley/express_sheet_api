@@ -8,12 +8,12 @@ const {
   getComment,
   login,
 } = require("../modal/ss");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const auth_middleware = require("../middleware/auth");
-const {hashing} = require("../middleware/hashing");
+const { hashing } = require("../middleware/hashing");
 
 //Wellcome page
-router.get("/", auth_middleware, (req, res) => {
+router.get("/", (req, res) => {
   res.send(`
     <div class='container' style="
       width : 100vw;
@@ -52,8 +52,8 @@ router.get("/api/userdata", auth_middleware, (req, res) => {
 
 //ADD DATA
 router.post("/api/register", auth_middleware, (req, res) => {
-  let password = hashing(req.body.password)
-  
+  let password = hashing(req.body.password);
+
   const { name, email, phone } = req.body;
 
   setData(name, email, password, phone).then((data) => {
@@ -123,16 +123,15 @@ router.post("/api/login", async (req, res) => {
   const { email, password } = await req.body;
   login(email, password).then((data) => {
     if (data) {
-      jwt.sign(email, process.env.TOKEN, (err, token)=>{
-        if(err){
-          res.status(404)
+      jwt.sign(email, process.env.TOKEN, (err, token) => {
+        if (err) {
+          res.status(404);
         }
         res.status(200).json({
           message: "success",
-          token : token
+          token: token,
         });
-      })
-     
+      });
     } else {
       res.status(404).json({
         message: "failed",
