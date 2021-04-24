@@ -1,17 +1,17 @@
 ###
 GET http://localhost:5000/api/userdata
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.ZmFkbGlzZWxhekBnbWFpbC5jb20.Clyp0kwDdQcKc5F5Bix-u4MJMKvL4gCf9IqyE9aQEG8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhZGxpc2VsYXpAZ21haWwuY29tIiwiZXhwIjoxNjE5Mjk0OTk2LCJpYXQiOjE2MTkyOTEzOTZ9._YMf4fyDjZOxLee0G_VQ6D2dHWQJtSs0MAQGK4D6tXA
 
 ###
 POST http://localhost:5000/api/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.ZmFkbGlzZWxhekBnbWFpbC5jb20.Clyp0kwDdQcKc5F5Bix-u4MJMKvL4gCf9IqyE9aQEG8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhZGxpc2VsYXpAZ21haWwuY29tIiwiZXhwIjoxNjE5Mjk0OTk2LCJpYXQiOjE2MTkyOTEzOTZ9._YMf4fyDjZOxLee0G_VQ6D2dHWQJtSs0MAQGK4D6tXA
 
 {
-    "name" : "martin",
-    "email" : "martin@gmail.com",
-    "password" : "martin13",
+    "name" : "durhaka",
+    "email" : "durhaka@gmail.com",
+    "password" : "durhaka13",
     "phone" : "081213655573"
 }
 

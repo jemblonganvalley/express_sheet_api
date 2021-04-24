@@ -123,15 +123,20 @@ router.post("/api/login", async (req, res) => {
   const { email, password } = await req.body;
   login(email, password).then((data) => {
     if (data) {
-      jwt.sign(email, process.env.TOKEN, (err, token) => {
-        if (err) {
-          res.status(404);
+      jwt.sign(
+        // expireted 1 hour
+        { email: email, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+        process.env.TOKEN,
+        (err, token) => {
+          if (err) {
+            res.status(404);
+          }
+          res.status(200).json({
+            message: "success",
+            token: token,
+          });
         }
-        res.status(200).json({
-          message: "success",
-          token: token,
-        });
-      });
+      );
     } else {
       res.status(404).json({
         message: "failed",
