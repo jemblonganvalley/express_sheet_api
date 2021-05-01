@@ -7,6 +7,7 @@ const {
   setComment,
   getComment,
   login,
+  setAbsens
 } = require("../modal/ss");
 const jwt = require("jsonwebtoken");
 const auth_middleware = require("../middleware/auth");
@@ -144,5 +145,22 @@ router.post("/api/login", async (req, res) => {
     }
   });
 });
+
+router.post('/api/absens',auth_middleware, (req,res)=>{
+  setAbsens(data)
+  .then(result => {
+    res.status(200).json({
+      msg : 'success',
+      data : data
+    })
+  })
+  .catch(err => {
+    res.status(500).json({
+      msg : "failed",
+      data : err
+    })
+  })
+})
+
 
 module.exports = router;

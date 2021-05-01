@@ -138,3 +138,17 @@ exports.login = async (email, password) => {
     return false;
   }
 };
+
+
+//ABSENS
+exports.setAbsens = async(data)=>{
+  await doc.useServiceAccountAuth(key);
+  await doc.loadInfo();
+  const sheet = await doc.sheetsByTitle["comment"];
+  // read rows
+  const rows = await sheet.getRows();
+  const addComment = await sheet.addRow({
+    id: rows.length + 1,
+    data : data
+  });
+}
