@@ -147,7 +147,7 @@ router.post("/api/login", async (req, res) => {
 });
 
 //ABSENS
-router.post('/api/absens',auth_middleware, (req,res)=>{
+router.post('/api/absens', (req,res)=>{
 
   const data = req.body.data
 

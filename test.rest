@@ -72,7 +72,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhZGxpc2VsYXpAZ21haWwuY29tIiwiZXhwIjoxNjE5OTA1ODkwLCJpYXQiOjE2MTk5MDIyOTB9.z56OipDF7yVTTAoDKCXcKkeiL7W67oXVChfDsXjv7OM
 
 {
-    "data" : "selastio"
+    "data" : "KETUT BELA NUSANTARA - 0817 9793 396"
 }
 
 
