@@ -142,13 +142,24 @@ exports.login = async (email, password) => {
 
 //ABSENS
 exports.setAbsens = async(data)=>{
+  const abs = []
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
   const sheet = await doc.sheetsByTitle["absens"];
   // read rows
   const rows = await sheet.getRows();
-  const addComment = await sheet.addRow({
-    id: rows.length + 1,
-    data : data
-  });
+
+  await rows.map((e)=>{
+    abs.push(e._rawData[1])
+  })
+
+  const idx = await  abs.indexOf(data)
+  rows[idx].hadir = 'hadir'
+
+  await rows[idx].save()
+  return data
+  // const addComment = await sheet.addRow({
+  //   id: rows.length + 1,
+  //   data : data
+  // });
 }

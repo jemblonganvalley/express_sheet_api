@@ -146,6 +146,7 @@ router.post("/api/login", async (req, res) => {
   });
 });
 
+//ABSENS
 router.post('/api/absens',auth_middleware, (req,res)=>{
 
   const data = req.body.data
@@ -154,7 +155,7 @@ router.post('/api/absens',auth_middleware, (req,res)=>{
   .then(result => {
     res.status(200).json({
       msg : 'success',
-      data : data
+      data : result
     })
   })
   .catch(err => {
