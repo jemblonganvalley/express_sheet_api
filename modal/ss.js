@@ -144,7 +144,7 @@ exports.login = async (email, password) => {
 exports.setAbsens = async(data)=>{
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
-  const sheet = await doc.sheetsByTitle["comment"];
+  const sheet = await doc.sheetsByTitle["absens"];
   // read rows
   const rows = await sheet.getRows();
   const addComment = await sheet.addRow({
