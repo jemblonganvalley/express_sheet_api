@@ -71,5 +71,13 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhZGxpc2VsYXpAZ21haWwuY29tIiwiZXhwIjoxNjE5OTEwMTM4LCJpYXQiOjE2MTk5MDY1Mzh9.qXdZTTSYoBeHIhWEEXo0s99OkqOA7GvbXt1WOv4vfio
 
 {
+    "data" : "1"
+}
+
+###
+POST http://localhost:5000/api/absens/add
+Content-Type: application/json
+
+{
     "data" : "I GUSTI PUTU PUTRA WIRAWAN - 0877 6591 7073"
 }

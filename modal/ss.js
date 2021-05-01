@@ -143,23 +143,41 @@ exports.login = async (email, password) => {
 //ABSENS
 exports.setAbsens = async(data)=>{
   const abs = []
+  const nm = []
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
   const sheet = await doc.sheetsByTitle["absens"];
   // read rows
   const rows = await sheet.getRows();
 
-  await rows.map((e)=>{
-    abs.push(e._rawData[1])
+  let ps = await rows.map((e)=>{
+    abs.push(e._rawData[0])
+    nm.push(e._rawData[1])
   })
 
-  const idx = await  abs.indexOf(data)
+  const idx = await abs.indexOf(data)
   rows[idx].hadir = 'hadir'
 
   await rows[idx].save()
-  return data
+  return nm[idx]
   // const addComment = await sheet.addRow({
   //   id: rows.length + 1,
   //   data : data
   // });
+}
+
+//ABSENS
+exports.addAbesns = async(data)=>{
+  const abs = []
+  await doc.useServiceAccountAuth(key);
+  await doc.loadInfo();
+  const sheet = await doc.sheetsByTitle["addAbsens"];
+  // read rows
+  const rows = await sheet.getRows();
+  const addComment = await sheet.addRow({
+    id: rows.length + 1,
+    data : data
+  });
+
+  return await data
 }

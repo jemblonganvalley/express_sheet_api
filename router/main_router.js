@@ -7,7 +7,8 @@ const {
   setComment,
   getComment,
   login,
-  setAbsens
+  setAbsens,
+  addAbesns
 } = require("../modal/ss");
 const jwt = require("jsonwebtoken");
 const auth_middleware = require("../middleware/auth");
@@ -152,6 +153,27 @@ router.post('/api/absens', (req,res)=>{
   const data = req.body.data
 
   setAbsens(data)
+  .then(result => {
+    res.status(200).json({
+      msg : 'success',
+      data : result
+    })
+  })
+  .catch(err => {
+    res.status(500).json({
+      msg : "failed",
+      data : err
+    })
+  })
+})
+
+
+//ABSENS add
+router.post('/api/absens/add', (req,res)=>{
+
+  const data = req.body.data
+
+  addAbesns(data)
   .then(result => {
     res.status(200).json({
       msg : 'success',
