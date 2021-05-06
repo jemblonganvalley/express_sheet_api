@@ -9,13 +9,14 @@ Content-Type: application/json
 ###
 POST https://fadlisheet.herokuapp.com/api/register
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhZGxpc2VsYXpAZ21haWwuY29tIiwiZXhwIjoxNjE5OTUyMTMxLCJpYXQiOjE2MTk5NDg1MzF9.rGZJzvHvZTPvI-nVmqWf-nbgxarC10wcyGrerJ3EGwM
 
 {
     "token" : "jvalley2020",
-    "name" : "bryan",
-    "email" : "bryan@gmail.com",
+    "name" : "agil",
+    "email" : "agil@gmail.com",
     "password" : "1qazxsw2",
-    "phone" : "081213655573"
+    "phone" : "08111222223333"
 }
 
 ###

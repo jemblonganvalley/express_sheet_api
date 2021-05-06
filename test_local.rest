@@ -81,3 +81,8 @@ Content-Type: application/json
 {
     "data" : "I GUSTI PUTU PUTRA WIRAWAN - 0877 6591 7073"
 }
+
+# GENERATED QR CODE
+###
+POST http://localhost:5000/api/qrcode/generate/2
+Content-Type: application/json

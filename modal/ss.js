@@ -2,10 +2,11 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const key = require("./key.json");
 const { v4: uuidv4 } = require("uuid");
 const e = require("express");
-const {unHashing} = require("../middleware/hashing")
+const { unHashing } = require("../middleware/hashing");
 const doc = new GoogleSpreadsheet(
   "1BRuQylaePuMb65Q2q8kLZsuT5LK4hClN-cI3AGyylUo"
 );
+const QRCode = require("qrcode");
 
 //READ USER
 exports.getData = async () => {
@@ -108,7 +109,6 @@ exports.setComment = async (comment_username, comment_body) => {
 
 //LOGIN
 exports.login = async (email, password) => {
-
   const em = [];
   const pass = [];
   await doc.useServiceAccountAuth(key);
@@ -139,36 +139,35 @@ exports.login = async (email, password) => {
   }
 };
 
-
 //ABSENS
-exports.setAbsens = async(data)=>{
-  const abs = []
-  const nm = []
+exports.setAbsens = async (data) => {
+  const abs = [];
+  const nm = [];
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
   const sheet = await doc.sheetsByTitle["absens"];
   // read rows
   const rows = await sheet.getRows();
 
-  let ps = await rows.map((e)=>{
-    abs.push(e._rawData[0])
-    nm.push(e._rawData[1])
-  })
+  let ps = await rows.map((e) => {
+    abs.push(e._rawData[0]);
+    nm.push(e._rawData[1]);
+  });
 
-  const idx = await abs.indexOf(data)
-  rows[idx].hadir = 'hadir'
+  const idx = await abs.indexOf(data);
+  rows[idx].hadir = "hadir";
 
-  await rows[idx].save()
-  return nm[idx]
+  await rows[idx].save();
+  return nm[idx];
   // const addComment = await sheet.addRow({
   //   id: rows.length + 1,
   //   data : data
   // });
-}
+};
 
 //ABSENS
-exports.addAbesns = async(data)=>{
-  const abs = []
+exports.addAbesns = async (data) => {
+  const abs = [];
   await doc.useServiceAccountAuth(key);
   await doc.loadInfo();
   const sheet = await doc.sheetsByTitle["addAbsens"];
@@ -176,8 +175,44 @@ exports.addAbesns = async(data)=>{
   const rows = await sheet.getRows();
   const addComment = await sheet.addRow({
     id: rows.length + 1,
-    data : data
+    data: data,
   });
 
-  return await data
-}
+  return await data;
+};
+
+const generteQrCode = async (dt) => {
+  return await QRCode.toDataURL(dt)
+    .then((url) => {
+      return url;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+//GENERATE QR CODE satuan
+exports.genQrCode = async (dtx) => {
+  await doc.useServiceAccountAuth(key);
+  await doc.loadInfo();
+  const sheet = await doc.sheetsByTitle["qrcode"];
+  // read rows
+  const rows = await sheet.getRows();
+
+  return await generteQrCode(rows[dtx - 1]._rawData[1]);
+
+  // return rows[1]._rawData[1];
+
+  // const rr = await rows.map((e, i) => {
+  //   setTimeout(() => {
+  //     generteQrCode(e._rawData[1])
+  //       .then((result) => {
+  //         rows[i].qrcode = result;
+  //         rows[i].save();
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }, 2000);
+  // });
+};

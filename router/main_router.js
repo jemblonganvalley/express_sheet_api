@@ -8,7 +8,8 @@ const {
   getComment,
   login,
   setAbsens,
-  addAbesns
+  addAbesns,
+  genQrCode,
 } = require("../modal/ss");
 const jwt = require("jsonwebtoken");
 const auth_middleware = require("../middleware/auth");
@@ -148,45 +149,81 @@ router.post("/api/login", async (req, res) => {
 });
 
 //ABSENS
-router.post('/api/absens', (req,res)=>{
-
-  const data = req.body.data
+router.post("/api/absens", (req, res) => {
+  const data = req.body.data;
 
   setAbsens(data)
-  .then(result => {
-    res.status(200).json({
-      msg : 'success',
-      data : result
+    .then((result) => {
+      res.status(200).json({
+        msg: "success",
+        data: result,
+      });
     })
-  })
-  .catch(err => {
-    res.status(500).json({
-      msg : "failed",
-      data : err
-    })
-  })
-})
-
+    .catch((err) => {
+      res.status(500).json({
+        msg: "failed",
+        data: err,
+      });
+    });
+});
 
 //ABSENS add
-router.post('/api/absens/add', (req,res)=>{
-
-  const data = req.body.data
+router.post("/api/absens/add", (req, res) => {
+  const data = req.body.data;
 
   addAbesns(data)
-  .then(result => {
-    res.status(200).json({
-      msg : 'success',
-      data : result
+    .then((result) => {
+      res.status(200).json({
+        msg: "success",
+        data: result,
+      });
     })
-  })
-  .catch(err => {
-    res.status(500).json({
-      msg : "failed",
-      data : err
-    })
-  })
-})
+    .catch((err) => {
+      res.status(500).json({
+        msg: "failed",
+        data: err,
+      });
+    });
+});
 
+//ABSENS add
+router.post("/api/qrcode/generate/:id", (req, res) => {
+  const id = req.params.id;
+
+  genQrCode(id)
+    .then((result) => {
+      res.status(200).json({
+        msg: "success",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        msg: "failed",
+        err: err,
+      });
+    });
+});
+
+router.get("/api/qrcode/generate/:id", (req, res) => {
+  const id = req.params.id;
+  genQrCode(id)
+    .then((result) => {
+      res.status(200).send(`
+      <div style="width : 100vw; height : 100vh; display:flex; justify-content : center; align-items: center; box-sizing:border-box; flex-direction : column;">
+        <img src="${result}" style="width : 300px; height:300px;"alt="qrcode ${id}"/>
+        <a href="${result}" download="${id}.png">
+          <button>download qrcode ${id}</button>
+        </a>
+        </div>
+      `);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        msg: "failed",
+        err: err,
+      });
+    });
+});
 
 module.exports = router;
